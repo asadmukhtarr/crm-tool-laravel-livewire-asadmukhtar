@@ -1,4 +1,4 @@
-# Gudiliesn
+# Guidlines
 - For Learn Livewire, You should understand :
     - Laravel Installation
     - Laravel Route

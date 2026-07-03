@@ -7,6 +7,14 @@
 - Installation of Livewire 
     - Step # 1: Install Laravel Project
     - Step # 2: Install Livewire In Laravel Project 
+# Learning Points :
+    - Understanding of laravel
+    - Controllers
+    - Views
+    - Routes
+    - Authentication System
+    - Livewire Installation
+    - Livewire First Component 
 
 # Project Plan :
 📊 DASHBOARD

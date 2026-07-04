@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\pagesController;
+Route::get('/',function(){
+    return view('auth.login');
+});
 // direct route ...
 Route::livewire('dashboard','pages::admin.dashboard')->name('dashboard');
 Route::prefix('contacts')->group(function(){

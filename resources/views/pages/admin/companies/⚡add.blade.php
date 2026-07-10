@@ -6,6 +6,7 @@ new class extends Component
 {
     //
     public $company_name;
+    public $company_registration_no;
     public $company_email;
     public $company_phone;
     public $company_address;
@@ -21,9 +22,29 @@ new class extends Component
     public $company_owner;
     public $company_tags;
     public $company_notes;
+    protected $rules = [
+        'company_name' => 'required',
+        'company_registration_no' => 'required',
+        'company_email' => 'required',
+        'company_phone' => 'required',
+        'company_address' => 'required',
+        'company_city' => 'required',
+        'company_state' => 'required',
+        'company_zip' => 'required',
+        'company_country' => 'required',
+        'company_website' => 'required',
+        'company_industry' => 'required',
+        'company_size' => 'required',
+        'company_rating' => 'required',
+        'company_founded_date' => 'required',
+        'company_owner' => 'required',
+        'company_tags' => 'required',
+        'company_notes' => 'required',
+    ];
     // form submit ..
     public function form_submit()
     {
+        $this->validate();
         dd($this->company_name);
     }
 };
@@ -42,7 +63,7 @@ new class extends Component
                     <i class="fas fa-arrow-left"></i> Back to Companies
                 </a>
                 <button type="button" form="companyForm" wire:click="form_submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Save Company
+                    <i class="fas fa-save" wire:loading.remove></i> <i class="fas fa-spinner fa-spin" wire:loading></i> Save Company
                 </button>
             </div>
         </div>
@@ -67,13 +88,19 @@ new class extends Component
                                             Company Name <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" class="form-control" wire:model.live="company_name" placeholder="Enter company name">
+                                        @error('company_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
                                             <i class="fas fa-hashtag me-1 text-muted"></i>
-                                            Company Registration No. {{ $company_name }}
+                                            Company Registration No.
                                         </label>
                                         <input type="text" class="form-control" wire:model="company_registration_no" placeholder="Enter registration number">
+                                        @error('company_registration_no')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -81,6 +108,9 @@ new class extends Component
                                             Website
                                         </label>
                                         <input type="url" class="form-control" wire:model="company_website" placeholder="https://example.com">
+                                        @error('company_website')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -88,6 +118,9 @@ new class extends Component
                                             Company Email
                                         </label>
                                         <input type="email" class="form-control" wire:model="company_email" placeholder="info@company.com">
+                                        @error('company_email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -95,6 +128,9 @@ new class extends Component
                                             Phone Number
                                         </label>
                                         <input type="tel" class="form-control" wire:model="company_phone" placeholder="+1 234 567 8900">
+                                        @error('company_phone')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -113,6 +149,9 @@ new class extends Component
                                             <option>Transportation</option>
                                             <option>Other</option>
                                         </select>
+                                        @error('company_industry')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -129,6 +168,9 @@ new class extends Component
                                             <option>Government</option>
                                             <option>Other</option>
                                         </select>
+                                        @error('company_type')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -144,6 +186,9 @@ new class extends Component
                                             <option>501-1000</option>
                                             <option>1000+</option>
                                         </select>
+                                        @error('company_employee_count')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-12">
                                         <label class="form-label fw-medium">
@@ -151,6 +196,9 @@ new class extends Component
                                             Description
                                         </label>
                                         <textarea class="form-control" wire:model="company_description" rows="3" placeholder="Enter company description..."></textarea>
+                                        @error('company_description')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -168,6 +216,9 @@ new class extends Component
                                             Street Address
                                         </label>
                                         <input type="text" class="form-control" wire:model="company_address" placeholder="Enter street address">
+                                        @error('company_address')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label fw-medium">
@@ -175,6 +226,9 @@ new class extends Component
                                             City
                                         </label>
                                         <input type="text" class="form-control" wire:model="company_city" placeholder="Enter city">
+                                        @error('company_city')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -182,6 +236,9 @@ new class extends Component
                                             State/Province
                                         </label>
                                         <input type="text" class="form-control" wire:model="company_state" placeholder="Enter state">
+                                        @error('company_state')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -189,6 +246,9 @@ new class extends Component
                                             Postal Code
                                         </label>
                                         <input type="text" class="form-control" wire:model="company_postal_code" placeholder="Enter postal code">
+                                        @error('company_postal_code')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -207,6 +267,9 @@ new class extends Component
                                             <option>Pakistan</option>
                                             <option>Other</option>
                                         </select>
+                                        @error('company_country')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +290,9 @@ new class extends Component
                                             <span class="input-group-text"><i class="fab fa-facebook"></i></span>
                                             <input type="text" class="form-control" wire:model="company_facebook" placeholder="Facebook URL">
                                         </div>
+                                        @error('company_facebook')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -237,6 +303,9 @@ new class extends Component
                                             <span class="input-group-text"><i class="fab fa-twitter"></i></span>
                                             <input type="text" class="form-control" wire:model="company_twitter" placeholder="Twitter URL">
                                         </div>
+                                        @error('company_twitter')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -247,6 +316,9 @@ new class extends Component
                                             <span class="input-group-text"><i class="fab fa-linkedin"></i></span>
                                             <input type="text" class="form-control" wire:model="company_linkedin" placeholder="LinkedIn URL">
                                         </div>
+                                        @error('company_linkedin')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -257,6 +329,9 @@ new class extends Component
                                             <span class="input-group-text"><i class="fab fa-instagram"></i></span>
                                             <input type="text" class="form-control" wire:model="company_instagram" placeholder="Instagram URL">
                                         </div>
+                                        @error('company_instagram')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -267,6 +342,9 @@ new class extends Component
                                             <span class="input-group-text"><i class="fab fa-youtube"></i></span>
                                             <input type="text" class="form-control" wire:model="company_youtube" placeholder="YouTube URL">
                                         </div>
+                                        @error('company_youtube')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label fw-medium">
@@ -277,6 +355,9 @@ new class extends Component
                                             <span class="input-group-text"><i class="fab fa-github"></i></span>
                                             <input type="text" class="form-control" wire:model="company_github" placeholder="GitHub URL">
                                         </div>
+                                        @error('company_github')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -304,6 +385,9 @@ new class extends Component
                                             <option value="pending">🟡 Pending</option>
                                             <option value="suspended">⚫ Suspended</option>
                                         </select>
+                                        @error('company_status')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label fw-medium">
@@ -318,6 +402,9 @@ new class extends Component
                                             <option>⭐⭐⭐⭐ 4 Stars</option>
                                             <option>⭐⭐⭐⭐⭐ 5 Stars</option>
                                         </select>
+                                        @error('company_rating')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div>
                                         <label class="form-label fw-medium">
@@ -325,6 +412,9 @@ new class extends Component
                                             Founded Date
                                         </label>
                                         <input type="date" wire:model="company_founded_date" class="form-control">
+                                        @error('company_founded_date')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -350,6 +440,9 @@ new class extends Component
                                             <option>Mike Johnson</option>
                                             <option>Emily Brown</option>
                                         </select>
+                                        @error('company_owner')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <div>
                                         <label class="form-label fw-medium">

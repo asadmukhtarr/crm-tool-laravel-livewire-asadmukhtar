@@ -124,7 +124,7 @@ routes/
 ## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/crm-system.git
+git clone https://github.com/asadmukhtarr/crm-tool-laravel-livewire-asadmukhtar.git
 ```
 
 Move to Project

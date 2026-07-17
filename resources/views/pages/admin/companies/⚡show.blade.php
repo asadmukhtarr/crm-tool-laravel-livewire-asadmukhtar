@@ -1,10 +1,16 @@
 <?php
 
 use Livewire\Component;
+use App\Models\company;
 
 new class extends Component
 {
     //
+    public $company;
+    public function mount($id){
+        $this->company = company::find($id);
+      //  dd($this->company);
+    }
     
 };
 ?>
@@ -101,163 +107,204 @@ new class extends Component
             <!-- Left Column - Company Details -->
             <div class="col-lg-8">
                 <!-- Company Information -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="fw-semibold mb-0">
-                            <i class="fas fa-info-circle text-primary me-2"></i>
-                            Company Information
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">Company Name</label>
-                                <p class="fw-semibold">TechCorp Solutions</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">Registration No.</label>
-                                <p class="fw-semibold">TC-2024-001</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-globe me-1"></i> Website
-                                </label>
-                                <p>
-                                    <a href="#" class="text-primary">www.techcorp.com</a>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-envelope me-1"></i> Email
-                                </label>
-                                <p>
-                                    <a href="mailto:info@techcorp.com" class="text-primary">info@techcorp.com</a>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-phone me-1"></i> Phone
-                                </label>
-                                <p>+1 (555) 123-4567</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-industry me-1"></i> Industry
-                                </label>
-                                <p>Technology</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-tag me-1"></i> Company Type
-                                </label>
-                                <p>Private Limited</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-users me-1"></i> Employee Count
-                                </label>
-                                <p>51-200 employees</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-star me-1"></i> Rating
-                                </label>
-                                <p>
-                                    <span class="text-warning">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </span>
-                                    <span class="text-muted ms-1">4.5/5</span>
-                                </p>
-                            </div>
-                            <div class="col-12">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-align-left me-1"></i> Description
-                                </label>
-                                <p class="mb-0">TechCorp Solutions is a leading technology company specializing in software development, cloud solutions, and digital transformation services. With over 10 years of experience, we serve clients across various industries.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Company Information -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="fw-semibold mb-0">
+            <i class="fas fa-info-circle text-primary me-2"></i>
+            Company Information
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">Company Name</label>
+                <p class="fw-semibold">{{ $company->company_name ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">Registration No.</label>
+                <p class="fw-semibold">{{ $company->company_registration_no ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-globe me-1"></i> Website
+                </label>
+                <p>
+                    @if($company->company_website)
+                        <a href="{{ $company->company_website }}" target="_blank" class="text-primary">
+                            {{ $company->company_website }}
+                        </a>
+                    @else
+                        <span class="text-muted">N/A</span>
+                    @endif
+                </p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-envelope me-1"></i> Email
+                </label>
+                <p>
+                    @if($company->company_email)
+                        <a href="mailto:{{ $company->company_email }}" class="text-primary">
+                            {{ $company->company_email }}
+                        </a>
+                    @else
+                        <span class="text-muted">N/A</span>
+                    @endif
+                </p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-phone me-1"></i> Phone
+                </label>
+                <p>{{ $company->company_phone ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-industry me-1"></i> Industry
+                </label>
+                <p>{{ $company->company_industry ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-tag me-1"></i> Company Type
+                </label>
+                <p>{{ $company->company_type ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-users me-1"></i> Employee Count
+                </label>
+                <p>{{ $company->company_size ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-calendar-alt me-1"></i> Founded Date
+                </label>
+                <p>{{ $company->company_founded_date ? \Carbon\Carbon::parse($company->company_founded_date)->format('M d, Y') : 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-star me-1"></i> Rating
+                </label>
+                <p>
+                    <span class="text-warning">
+                        {{ $company->company_rating ?? 'No description available.' }}
+                    </span>
+                </p>
+            </div>
+            <div class="col-12">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-align-left me-1"></i> Description
+                </label>
+                <p class="mb-0">{{ $company->company_notes ?? 'No description available.' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- Address Information -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="fw-semibold mb-0">
-                            <i class="fas fa-map-marker-alt text-primary me-2"></i>
-                            Address Information
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-road me-1"></i> Street Address
-                                </label>
-                                <p>123 Tech Park Drive</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-city me-1"></i> City
-                                </label>
-                                <p>San Francisco</p>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-map-pin me-1"></i> State
-                                </label>
-                                <p>California</p>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-mailbox me-1"></i> Postal Code
-                                </label>
-                                <p>94105</p>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="text-muted small fw-medium">
-                                    <i class="fas fa-flag me-1"></i> Country
-                                </label>
-                                <p>United States</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Address Information -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="fw-semibold mb-0">
+            <i class="fas fa-map-marker-alt text-primary me-2"></i>
+            Address Information
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-road me-1"></i> Street Address
+                </label>
+                <p>{{ $company->company_address ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-6">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-city me-1"></i> City
+                </label>
+                <p>{{ $company->company_city ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-4">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-map-pin me-1"></i> State
+                </label>
+                <p>{{ $company->company_state ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-4">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-mailbox me-1"></i> Postal Code
+                </label>
+                <p>{{ $company->company_zip ?? 'N/A' }}</p>
+            </div>
+            <div class="col-md-4">
+                <label class="text-muted small fw-medium">
+                    <i class="fas fa-flag me-1"></i> Country
+                </label>
+                <p>{{ $company->company_country ?? 'N/A' }}</p>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <!-- Social Media -->
-                <div class="card mb-4">
-                    <div class="card-header">
-                        <h5 class="fw-semibold mb-0">
-                            <i class="fas fa-share-alt text-primary me-2"></i>
-                            Social Media
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex flex-wrap gap-3">
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="fab fa-facebook"></i> Facebook
-                            </a>
-                            <a href="#" class="btn btn-outline-info">
-                                <i class="fab fa-twitter"></i> Twitter
-                            </a>
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="fab fa-linkedin"></i> LinkedIn
-                            </a>
-                            <a href="#" class="btn btn-outline-danger">
-                                <i class="fab fa-instagram"></i> Instagram
-                            </a>
-                            <a href="#" class="btn btn-outline-danger">
-                                <i class="fab fa-youtube"></i> YouTube
-                            </a>
-                            <a href="#" class="btn btn-outline-secondary">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <!-- Social Media -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="fw-semibold mb-0">
+            <i class="fas fa-share-alt text-primary me-2"></i>
+            Social Media
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="d-flex flex-wrap gap-3">
+            @php
+                $socialMedia = json_decode($company->company_social ?? '{}', true);
+            @endphp
+            
+            @if(isset($socialMedia['facebook']))
+                <a href="{{ $socialMedia['facebook'] }}" target="_blank" class="btn btn-outline-primary">
+                    <i class="fab fa-facebook"></i> Facebook
+                </a>
+            @endif
+            
+            @if(isset($socialMedia['twitter']))
+                <a href="{{ $socialMedia['twitter'] }}" target="_blank" class="btn btn-outline-info">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+            @endif
+            
+            @if(isset($socialMedia['linkedin']))
+                <a href="{{ $socialMedia['linkedin'] }}" target="_blank" class="btn btn-outline-primary">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            @endif
+            
+            @if(isset($socialMedia['instagram']))
+                <a href="{{ $socialMedia['instagram'] }}" target="_blank" class="btn btn-outline-danger">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            @endif
+            
+            @if(isset($socialMedia['youtube']))
+                <a href="{{ $socialMedia['youtube'] }}" target="_blank" class="btn btn-outline-danger">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+            @endif
+            
+            @if(isset($socialMedia['github']))
+                <a href="{{ $socialMedia['github'] }}" target="_blank" class="btn btn-outline-secondary">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            @endif
+            
+            @if(empty($socialMedia))
+                <p class="text-muted">No social media links available.</p>
+            @endif
+        </div>
+    </div>
+</div>
 
                 <!-- Recent Activity -->
                 <div class="card">

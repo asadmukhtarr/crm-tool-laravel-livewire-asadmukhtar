@@ -17,6 +17,7 @@ Route::prefix('contacts')->group(function(){
 Route::prefix('companies')->name('companies.')->group(function(){
     Route::livewire('/all', 'pages::admin.companies.all')->name('all');
     Route::livewire('/show/{id}', 'pages::admin.companies.show')->name('show');
+    Route::livewire('/edit/{id}', 'pages::admin.companies.edit')->name('edit');
     Route::livewire('/add', 'pages::admin.companies.add')->name('add');
 });
 

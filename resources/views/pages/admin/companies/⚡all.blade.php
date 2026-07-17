@@ -8,7 +8,15 @@ new class extends Component
     //
     public $companies;
     public function mount(){
+       $this->fetchCompanies();
+    }
+    public function fetchCompanies(){
         $this->companies = company::all();
+    }
+    public function delete($id){
+        company::find($id)->delete();
+        session()->flash('success', 'Company deleted successfully!');
+        $this->fetchCompanies();
     }
 };
 ?>
@@ -112,7 +120,15 @@ new class extends Component
                 </div>
             </div>
         </div>
-
+        @if (session()->has('success'))
+            <div class="alert-flash alert-flash-{{ session('type', 'info') }}">
+                <i class="fas fa-{{ session('type') === 'success' ? 'check-circle' : (session('type') === 'error' ? 'exclamation-circle' : 'info-circle') }}"></i>
+                {{ session('success') }}
+                <button class="alert-flash-close" onclick="this.parentElement.remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        @endif
         <!-- Stats Summary -->
         <div class="row g-3 mb-4">
             <div class="col-md-3">
@@ -243,17 +259,21 @@ new class extends Component
                                     {{ $company->company_rating }}
                                 </td>
                                 <td>
-                                    {{ $company->created_at }}
+                                    {{ $company->created_at->diffForHumans() }}
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
+                                        <a href="{{ route('companies.show', $company->id) }}">
                                         <button class="btn btn-outline-primary">
                                             <i class="fas fa-eye"></i>
                                         </button>
+                                        </a>
+                                        <a href="{{ route('companies.edit', $company->id) }}">
                                         <button class="btn btn-outline-secondary">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        <button class="btn btn-outline-danger">
+                                        </a>
+                                        <button class="btn btn-outline-danger" wire:click="delete({{ $company->id }})" wire:confirm="Are you sure to delete this company?">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </div>

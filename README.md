@@ -117,22 +117,6 @@ routes/
 
 ![Dashboard](screenshots/dashboard.png)
 
-## Contacts
-
-![Contacts](screenshots/contacts.png)
-
-## Companies
-
-![Companies](screenshots/companies.png)
-
-## Deals
-
-![Deals](screenshots/deals.png)
-
-## Tasks
-
-![Tasks](screenshots/tasks.png)
-
 ---
 
 # ⚙️ Installation

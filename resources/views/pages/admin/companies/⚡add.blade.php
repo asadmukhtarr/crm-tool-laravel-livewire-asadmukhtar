@@ -1,6 +1,7 @@
 <?php
 
 use Livewire\Component;
+use App\Models\company;
 
 new class extends Component
 {
@@ -26,26 +27,33 @@ new class extends Component
         'company_name' => 'required',
         'company_registration_no' => 'required',
         'company_email' => 'required',
-        'company_phone' => 'required',
-        'company_address' => 'required',
-        'company_city' => 'required',
-        'company_state' => 'required',
-        'company_zip' => 'required',
-        'company_country' => 'required',
-        'company_website' => 'required',
-        'company_industry' => 'required',
-        'company_size' => 'required',
-        'company_rating' => 'required',
-        'company_founded_date' => 'required',
-        'company_owner' => 'required',
-        'company_tags' => 'required',
-        'company_notes' => 'required',
     ];
     // form submit ..
     public function form_submit()
     {
         $this->validate();
-        dd($this->company_name);
+    //    dd('wotkr');
+        $company = new company;
+        $company->company_name = $this->company_name;
+        $company->company_registration_no = $this->company_registration_no;
+        $company->company_email = $this->company_email;
+        $company->company_phone = $this->company_phone;
+        $company->company_address = $this->company_address;
+        $company->company_city = $this->company_city;
+        $company->company_state = $this->company_state;
+        $company->company_zip = $this->company_zip;
+        $company->company_country = $this->company_country;
+        $company->company_website = $this->company_website;
+        $company->company_industry = $this->company_industry;
+        $company->company_size = $this->company_size;
+        $company->company_rating = $this->company_rating;
+        $company->company_founded_date = $this->company_founded_date;
+        $company->company_owner = $this->company_owner;
+        $company->company_tags = $this->company_tags;
+        $company->company_notes = $this->company_notes;
+        $company->save();
+        session()->flash('success', 'Company created successfully');
+        $this->reset();
     }
 };
 ?>

@@ -1,10 +1,15 @@
 <?php
 
 use Livewire\Component;
+use App\Models\company;
 
 new class extends Component
 {
     //
+    public $companies;
+    public function mount(){
+        $this->companies = company::all();
+    }
 };
 ?>
 
@@ -201,6 +206,7 @@ new class extends Component
                         </thead>
                         <tbody>
                             <!-- Company 1 -->
+                            @foreach ($companies as $company)
                             <tr>
                                 <td>
                                     <input type="checkbox" class="form-check-input">
@@ -211,87 +217,33 @@ new class extends Component
                                             <i class="fas fa-building fa-2x text-primary"></i>
                                         </div>
                                         <div>
-                                            <h6 class="mb-0 fw-semibold">TechCorp Solutions</h6>
-                                            <small class="text-muted">TC-2024-001</small>
+                                            <h6 class="mb-0 fw-semibold">{{ $company->company_name }}</h6>
+                                            <small class="text-muted">{{ $company->company_registration_no }}</small>
                                         </div>
                                     </div>
                                 </td>
-                                <td>Technology</td>
+                                <td>{{ $company->company_industry }}</td>
                                 <td>
                                     <span class="badge bg-info">24</span>
                                 </td>
                                 <td>
+                                    @if($company->status == 0)
                                     <span class="badge bg-success">
                                         <i class="fas fa-circle me-1" style="font-size: 8px;"></i>
                                         Active
                                     </span>
-                                </td>
-                                <td>
-                                    <span class="text-warning">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                    </span>
-                                    <span class="text-muted ms-1">4.5</span>
-                                </td>
-                                <td>
-                                    <small class="text-muted">2024-01-15</small>
-                                </td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-outline-secondary">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <!-- Company 2 -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="form-check-input">
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="company-logo me-2">
-                                            <i class="fas fa-hospital fa-2x text-success"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">HealthFirst Medical</h6>
-                                            <small class="text-muted">HF-2024-002</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Healthcare</td>
-                                <td>
-                                    <span class="badge bg-info">18</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
+                                    @else 
+                                     <span class="badge bg-danger">
                                         <i class="fas fa-circle me-1" style="font-size: 8px;"></i>
-                                        Active
+                                        Disable
                                     </span>
+                                    @endif
                                 </td>
                                 <td>
-                                    <span class="text-warning">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </span>
-                                    <span class="text-muted ms-1">5.0</span>
+                                    {{ $company->company_rating }}
                                 </td>
                                 <td>
-                                    <small class="text-muted">2024-01-20</small>
+                                    {{ $company->created_at }}
                                 </td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
@@ -307,168 +259,7 @@ new class extends Component
                                     </div>
                                 </td>
                             </tr>
-
-                            <!-- Company 3 -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="form-check-input">
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="company-logo me-2">
-                                            <i class="fas fa-chart-line fa-2x text-warning"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">FinVest Capital</h6>
-                                            <small class="text-muted">FV-2024-003</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Finance</td>
-                                <td>
-                                    <span class="badge bg-info">31</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-warning text-dark">
-                                        <i class="fas fa-circle me-1" style="font-size: 8px;"></i>
-                                        Pending
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="text-warning">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-o"></i>
-                                    </span>
-                                    <span class="text-muted ms-1">4.0</span>
-                                </td>
-                                <td>
-                                    <small class="text-muted">2024-02-01</small>
-                                </td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-outline-secondary">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <!-- Company 4 -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="form-check-input">
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="company-logo me-2">
-                                            <i class="fas fa-graduation-cap fa-2x text-info"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">EduTech Academy</h6>
-                                            <small class="text-muted">EA-2024-004</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Education</td>
-                                <td>
-                                    <span class="badge bg-info">15</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-danger">
-                                        <i class="fas fa-circle me-1" style="font-size: 8px;"></i>
-                                        Inactive
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="text-warning">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-o"></i>
-                                        <i class="fas fa-star-o"></i>
-                                    </span>
-                                    <span class="text-muted ms-1">3.0</span>
-                                </td>
-                                <td>
-                                    <small class="text-muted">2024-02-10</small>
-                                </td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-outline-secondary">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <!-- Company 5 -->
-                            <tr>
-                                <td>
-                                    <input type="checkbox" class="form-check-input">
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <div class="company-logo me-2">
-                                            <i class="fas fa-shopping-cart fa-2x text-danger"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-0 fw-semibold">RetailMax Stores</h6>
-                                            <small class="text-muted">RM-2024-005</small>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>Retail</td>
-                                <td>
-                                    <span class="badge bg-info">42</span>
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-circle me-1" style="font-size: 8px;"></i>
-                                        Active
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="text-warning">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </span>
-                                    <span class="text-muted ms-1">5.0</span>
-                                </td>
-                                <td>
-                                    <small class="text-muted">2024-02-15</small>
-                                </td>
-                                <td>
-                                    <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-outline-primary">
-                                            <i class="fas fa-eye"></i>
-                                        </button>
-                                        <button class="btn btn-outline-secondary">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-outline-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

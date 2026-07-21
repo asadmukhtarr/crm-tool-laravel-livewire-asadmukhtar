@@ -102,7 +102,7 @@ new class extends Component
             session()->flash('message', 'Company updated successfully!');
             session()->flash('type', 'success');
 
-            return $this->redirectRoute('companies.view', $this->companyId);
+            return redirect(route('companies.all'));
 
         } catch (\Exception $e) {
             session()->flash('message', 'Error updating company: ' . $e->getMessage());
@@ -130,7 +130,9 @@ new class extends Component
                     <i class="fas fa-arrow-left"></i> Cancel
                 </button>
                 <button type="submit" form="editCompanyForm" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Update Company
+                    <i class="fas fa-save" wire:loading.remove></i>
+                    <i class="fas fa-spinner fa-spin" wire:loading></i>
+                    Update Company
                 </button>
             </div>
         </div>

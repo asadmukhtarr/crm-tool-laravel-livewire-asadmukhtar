@@ -10,6 +10,8 @@ Route::livewire('dashboard','pages::admin.dashboard')->name('dashboard');
 Route::prefix('contacts')->group(function(){
     Route::livewire('/all','pages::admin.contacts.allcontacts')->name('contacts.all');
     Route::livewire('/add','pages::admin.contacts.add')->name('contacts.add');
+    Route::livewire('/edit/{id}','pages::admin.contacts.edit')->name('contacts.edit');
+    Route::livewire('/show/{id}','pages::admin.contacts.show')->name('contacts.show');
     Route::livewire('/groups','pages::admin.contacts.groups')->name('contacts.groups');
     Route::livewire('/import','pages::admin.contacts.import')->name('contacts.import');
 });
